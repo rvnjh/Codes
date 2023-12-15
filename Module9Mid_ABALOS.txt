@@ -1,0 +1,46 @@
+##JHO RAVEN ABALOS-CPE21S1
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BinaryTree:
+    def __init__(self, root):
+        self.root = Node(root)
+
+    def in_order_traversal(self, start, result):
+        if start:
+            result = self.in_order_traversal(start.left, result)
+            result += str(start.data) + ' '
+            result = self.in_order_traversal(start.right, result)
+        return result
+
+    def pre_order_traversal(self, start, result):
+        if start:
+            result += str(start.data) + ' '
+            result = self.pre_order_traversal(start.left, result)
+            result = self.pre_order_traversal(start.right, result)
+        return result
+
+    def post_order_traversal(self, start, result):
+        if start:
+            result = self.post_order_traversal(start.left, result)
+            result = self.post_order_traversal(start.right, result)
+            result += str(start.data) + ' '
+        return result
+
+# Example usage of the BinaryTree class:
+if __name__ == "__main__":
+    tree = BinaryTree(1)
+    tree.root.left = Node(2)
+    tree.root.right = Node(3)
+    tree.root.left.left = Node(4)
+    tree.root.left.right = Node(5)
+    tree.root.right.left = Node(6)
+    tree.root.right.right = Node(7)
+
+    print("In-order Traversal:", tree.in_order_traversal(tree.root, ""))
+    print("Pre-order Traversal:", tree.pre_order_traversal(tree.root, ""))
+    print("Post-order Traversal:", tree.post_order_traversal(tree.root, ""))
